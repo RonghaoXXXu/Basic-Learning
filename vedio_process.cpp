@@ -1,5 +1,5 @@
-//#include <highgui.hpp>
-//#include <opencv2/opencv.hpp>
+#include <highgui.hpp>
+#include <opencv2/opencv.hpp>
 //#include "opencv2/videoio.hpp"
 //#include <stdlib.h>
 //
@@ -11,16 +11,16 @@
 //Rect process_frame(Mat& image, int opts);
 //
 //int main(int argc, char** argv) {
-//	//1.Ê¶±ğÓë¸ú×ÙÊÓÆµÖĞµÄÌØ¶¨ÑÕÉ«¶ÔÏó
-//	//2.GrabCutÇ°¾°£¨ÌØ¶¨¶ÔÏóÌáÈ¡)
+//	//1.è¯†åˆ«ä¸è·Ÿè¸ªè§†é¢‘ä¸­çš„ç‰¹å®šé¢œè‰²å¯¹è±¡
+//	//2.GrabCutå‰æ™¯ï¼ˆç‰¹å®šå¯¹è±¡æå–)
 //	VideoCapture capture(0);
 //
 //	namedWindow("input", WINDOW_AUTOSIZE);
 //
-//	int fps = capture.get(CAP_PROP_FPS);//Ö¡ÂÊ
-//	int width = capture.get(CAP_PROP_FRAME_WIDTH);//¿í
-//	int height = capture.get(CAP_PROP_FRAME_HEIGHT);//¸ß
-//	int num_of_frames = capture.get(CAP_PROP_FRAME_COUNT);//×ÜÍ¼ÏñÊı
+//	int fps = capture.get(CAP_PROP_FPS);//å¸§ç‡
+//	int width = capture.get(CAP_PROP_FRAME_WIDTH);//å®½
+//	int height = capture.get(CAP_PROP_FRAME_HEIGHT);//é«˜
+//	int num_of_frames = capture.get(CAP_PROP_FRAME_COUNT);//æ€»å›¾åƒæ•°
 //
 //	printf("frame width: %d, frame height: %d, FPS : %d \n", width, height, fps);
 //
@@ -38,7 +38,7 @@
 //		compare(result, GC_PR_FGD, result, CMP_EQ);
 //
 //		Mat foreground(frame.size(), CV_8UC3, cv::Scalar(255, 255, 255));
-//		frame.copyTo(foreground, result); // ²»¸´ÖÆ±³¾°Êı¾İ
+//		frame.copyTo(foreground, result); // ä¸å¤åˆ¶èƒŒæ™¯æ•°æ®
 //
 //		imshow("result2", foreground);
 //
@@ -68,7 +68,7 @@
 //	//{
 //	//	cap >> background;
 //	//}
-//	////Í¼ÏñµÄ·´×ª,0´ú±íxÖáĞı×ª£¬ÈÎÒâÕıÊı´ú±íyÖáĞı×ª£¬ÈÎÒâ¸ºÊı´ú±íxºÍyÖáÍ¬Ê±Ğı×ª¡£
+//	////å›¾åƒçš„åè½¬,0ä»£è¡¨xè½´æ—‹è½¬ï¼Œä»»æ„æ­£æ•°ä»£è¡¨yè½´æ—‹è½¬ï¼Œä»»æ„è´Ÿæ•°ä»£è¡¨xå’Œyè½´åŒæ—¶æ—‹è½¬ã€‚
 //	//flip(background, background, 1);
 //
 //	//while (1)
@@ -92,15 +92,15 @@
 //	//	mask1 = mask1 + mask2;
 //
 //	//	Mat kernel = Mat::ones(3, 3, CV_32F);
-//	//	morphologyEx(mask1, mask1, cv::MORPH_OPEN, kernel);//ĞÎÌ¬Ñ§²Ù×÷£¬¿ªÔËËã
-//	//	morphologyEx(mask1, mask1, cv::MORPH_DILATE, kernel);//¸¯Ê´²Ù×÷
+//	//	morphologyEx(mask1, mask1, cv::MORPH_OPEN, kernel);//å½¢æ€å­¦æ“ä½œï¼Œå¼€è¿ç®—
+//	//	morphologyEx(mask1, mask1, cv::MORPH_DILATE, kernel);//è…èš€æ“ä½œ
 //
-//	//	//ÔÚÕâÀïmask1, mask2»¥ÎªÄæÔËËã£¬¼´mask1´ú±íÓĞºìÉ«µÄÎ»ÖÃ£¬mask2´ú±íÃ»ÓĞºìÉ«Ä»²¼µÄÎ»ÖÃ
-//	//	bitwise_not(mask1, mask2);//bitwise_not¶ÔÍ¼Ïñ£¨»Ò¶ÈÍ¼Ïñ»ò²ÊÉ«Í¼Ïñ¾ù¿É£©Ã¿¸öÏñËØÖµ½øĞĞ¶ş½øÖÆ¡°·Ç¡±²Ù×÷,mask×öÎªÊä³ö
+//	//	//åœ¨è¿™é‡Œmask1, mask2äº’ä¸ºé€†è¿ç®—ï¼Œå³mask1ä»£è¡¨æœ‰çº¢è‰²çš„ä½ç½®ï¼Œmask2ä»£è¡¨æ²¡æœ‰çº¢è‰²å¹•å¸ƒçš„ä½ç½®
+//	//	bitwise_not(mask1, mask2);//bitwise_notå¯¹å›¾åƒï¼ˆç°åº¦å›¾åƒæˆ–å½©è‰²å›¾åƒå‡å¯ï¼‰æ¯ä¸ªåƒç´ å€¼è¿›è¡ŒäºŒè¿›åˆ¶â€œéâ€æ“ä½œ,maskåšä¸ºè¾“å‡º
 //
 //	//	Mat res1, res2, final_output;
-//	//	bitwise_and(frame, frame, res1, mask2);//ÓëÔËËã£¬res1×÷ÎªÊä³ö£¬Ã»ÓĞºìÉ«Ä»²¼µÄÎ»ÖÃÕı³£±£Áô
-//	//	bitwise_and(background, background, res2, mask1);//ÓĞºìÉ«Ä»²¼µÄÎ»ÖÃ£¬Ê¹ÓÃ±³¾°ÏñËØÌî²¹
+//	//	bitwise_and(frame, frame, res1, mask2);//ä¸è¿ç®—ï¼Œres1ä½œä¸ºè¾“å‡ºï¼Œæ²¡æœ‰çº¢è‰²å¹•å¸ƒçš„ä½ç½®æ­£å¸¸ä¿ç•™
+//	//	bitwise_and(background, background, res2, mask1);//æœ‰çº¢è‰²å¹•å¸ƒçš„ä½ç½®ï¼Œä½¿ç”¨èƒŒæ™¯åƒç´ å¡«è¡¥
 //	//	addWeighted(res1, 1, res2, 1, 0, final_output);
 //
 //	//	imshow("Magic !!!", final_output);
@@ -130,10 +130,10 @@
 //	Rect rect;
 //	cvtColor(image, hsv, COLOR_BGR2HSV);
 //
-//	Mat se = getStructuringElement(MORPH_RECT, Size(15, 15), Point(-1, -1));//×ÔÉè¾í»ıºË
+//	Mat se = getStructuringElement(MORPH_RECT, Size(15, 15), Point(-1, -1));//è‡ªè®¾å·ç§¯æ ¸
 //	inRange(hsv, Scalar(100, 43, 46), Scalar(124, 255, 255), mask);
-//	//inRangeÊµÏÖ¶şÖµ»¯
-//	morphologyEx(mask, mask, MORPH_OPEN, se);//¿ªÔËËã
+//	//inRangeå®ç°äºŒå€¼åŒ–
+//	morphologyEx(mask, mask, MORPH_OPEN, se);//å¼€è¿ç®—
 //	morphologyEx(mask, mask, MORPH_DILATE, se);
 //
 //	vector<vector<Point>> contours;
@@ -141,7 +141,7 @@
 //	findContours(mask, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
 //
 //	for (size_t t = 0; t < contours.size(); t++) {
-//		//Õı¾ØĞÎ»æÖÆ
+//		//æ­£çŸ©å½¢ç»˜åˆ¶
 //
 //		rect = boundingRect(contours[t]);
 //		rectangle(image, rect, Scalar(0, 0, 0), 2, 4, 0);
@@ -149,17 +149,17 @@
 //
 //		//RotatedRect rect = minAreaRect(contours[t]);
 //
-//		////»ñÈ¡Ğı×ª¾ØĞÎµÄËÄ¸ö¶¥µã
+//		////è·å–æ—‹è½¬çŸ©å½¢çš„å››ä¸ªé¡¶ç‚¹
 //		//Point2f* vertices = new Point2f[4];
 //		//rect.points(vertices);
 //
-//		////ÖğÌõ±ß»æÖÆ
+//		////é€æ¡è¾¹ç»˜åˆ¶
 //		//for (int j = 0; j < 4; j++)
 //		//{
 //		//	line(image, vertices[j], vertices[(j + 1) % 4], cv::Scalar(0, 255, 0), 2);
 //		//}
 //
-//		//ÂÖÀª»æÖÆ
+//		//è½®å»“ç»˜åˆ¶
 //
 //		/*vector<cv::Point2f> contour_;
 //
@@ -172,6 +172,6 @@
 //			max = area;
 //			index = t;
 //		}*/
-//	}//Ñ°ÕÒ×î´óÂÖÀª
+//	}//å¯»æ‰¾æœ€å¤§è½®å»“
 //	return rect;
-//}
+}
